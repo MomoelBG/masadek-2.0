@@ -1,0 +1,118 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqys0fj02tafc"]
+
+[ext_resource type="Script" path="res://Script/player_2.gd" id="1_n3n8u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ej1q"]
+size = Vector3(0.497656, 0.994629, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d40f3"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="Animation" id="Animation_m7eqm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RLeg:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LLeg:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qyef0"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RLeg:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.261799), Vector3(0, 0, 0.523599), Vector3(0, 0, 0.261799), Vector3(0, 0, 0), Vector3(0, 0, -0.261799), Vector3(0, 0, -0.523599), Vector3(0, 0, -0.261799), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LLeg:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.261799), Vector3(0, 0, -0.486199), Vector3(0, 0, -0.261799), Vector3(0, 0, 0), Vector3(0, 0, 0.261799), Vector3(0, 0, 0.436332), Vector3(0, 0, 0.261799), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ll6ws"]
+_data = {
+"RESET": SubResource("Animation_m7eqm"),
+"walk": SubResource("Animation_qyef0")
+}
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+script = ExtResource("1_n3n8u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0538567, -0.20129, 1.49012e-08)
+shape = SubResource("BoxShape3D_7ej1q")
+
+[node name="LLeg" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="LLeg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98023e-08, -0.35, 1.49012e-08)
+size = Vector3(0.2, 0.7, 0.2)
+material = SubResource("StandardMaterial3D_d40f3")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="LLeg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.6, 1.49012e-08)
+size = Vector3(0.2, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_d40f3")
+
+[node name="RLeg" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RLeg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98023e-08, -0.35, -2.98023e-08)
+size = Vector3(0.2, 0.7, 0.2)
+material = SubResource("StandardMaterial3D_d40f3")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="RLeg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.6, 0)
+size = Vector3(0.2, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_d40f3")
+
+[node name="head" type="Node3D" parent="."]
+
+[node name="head" type="CSGBox3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0.15, -1.49012e-08)
+size = Vector3(0.5, 0.3, 0.4)
+material = SubResource("StandardMaterial3D_d40f3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ll6ws")
+}
